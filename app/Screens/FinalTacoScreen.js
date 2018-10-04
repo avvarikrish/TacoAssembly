@@ -31,12 +31,12 @@ class FinalTacoScreen extends Component {
     var product = [];
     AsyncStorage.getItem("Cart",(err,res)=> {
       if (!res) {
-       product.push (this.state.addToCartItem);
-       AsyncStorage.setItem("Cart",JSON.stringify(product));
+       product.push ({shell: this.state.addToCartShell, description: this.state.addToCartTaco});
+       AsyncStorage.setItem("Cart", JSON.stringify(product));
       } else {
         product = JSON.parse(res);
-        product.push(this.state.addToCartItem);
-        AsyncStorage.setItem("Cart",JSON.stringify(product));
+        product.push({shell: this.state.addToCartShell, description: this.state.addToCartTaco});
+        AsyncStorage.setItem("Cart", JSON.stringify(product));
       }
     })
     alert ("Item added to cart");

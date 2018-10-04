@@ -1,6 +1,21 @@
 import React, { Component } from "react";
-import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity, Dimensions } from 'react-native';
+import {
+  Card,
+  CardItem,
+  Thumbnail,
+  Container,
+  Content,
+  Icon,
+  Header,
+  Left,
+  Right,
+  Body,
+  Button,
+  Form
+} from "native-base";
 import axios from "axios";
+const { width, height } = Dimensions.get("window");
 
 class MainTacoScreen extends Component {
   constructor(props){
@@ -36,24 +51,47 @@ class MainTacoScreen extends Component {
   }
   render() {
     return (
-      <View style={styles.container}>
-        <TouchableOpacity onPress={() => this._assembleTaco()}>
-          <Text>Create your own taco!</Text>
-        </TouchableOpacity>
-        <TouchableOpacity onPress={() => this._createRandomTaco()}>
-          <Text>Create a random taco!</Text>
-        </TouchableOpacity>
+      <View style={{flex: 1}}>
+        <Card>
+          <TouchableOpacity
+            style={{
+              width: width,
+              marginVertical: 20,
+              borderRadius: 5,
+              paddingVertical: 0,
+              shadowOffset: { width: 0, height: 0 },
+              alignItems: "center",
+              justifyContent: "center",
+            }}
+            disabled = {false}
+            onPress = {() => this._assembleTaco()}
+          >
+            <Text style={{ color: "#fe5700", fontSize: 20, padding: 10}}>
+              Build your own Taco!
+            </Text>
+          </TouchableOpacity>
+        </Card>
+        <Card>
+          <TouchableOpacity
+            style={{
+              width: width,
+              marginVertical: 20,
+              borderRadius: 5,
+              paddingVertical: 0,
+              shadowOffset: { width: 0, height: 0 },
+              alignItems: "center",
+              justifyContent: "center",
+            }}
+            disabled = {false}
+            onPress = {() => this._createRandomTaco()}
+          >
+            <Text style={{ color: "#fe5700", fontSize: 20, padding: 10}}>
+              Create a Random Taco!
+            </Text>
+          </TouchableOpacity>
+        </Card>
       </View>
     );
   }
 }
 export default MainTacoScreen;
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});

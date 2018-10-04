@@ -5,6 +5,7 @@ import {
   createSwitchNavigator,
   createBottomTabNavigator
 } from "react-navigation";
+import Icon from "react-native-vector-icons/Ionicons";
 import { AsyncStorage } from "react-native";
 
 import MainTacoScreen from "./Screens/MainTacoScreen";
@@ -54,12 +55,18 @@ const AppStack = createBottomTabNavigator(
       screen: TacoStack,
       navigationOptions: {
         tabBarLabel: "TACOS",
+        tabBarIcon: ({ tintColor }) => (
+          <Icon name="ios-nutrition-outline" color={tintColor} size={30} />
+        ),
       }
     },
     Cart: {
       screen: CartStack,
       navigationOptions: ({ navigation }) => ({
         tabBarLabel: "CART",
+        tabBarIcon: ({ tintColor }) => (
+          <Icon name="ios-cart-outline" color={tintColor} size={24} />
+        ),
         tabBarOnPress: async () => {
           const items = await AsyncStorage.getItem("Cart");
           totalAddToCartItems = JSON.parse (items);
@@ -70,6 +77,20 @@ const AppStack = createBottomTabNavigator(
           }
         }
       })
+    }
+  },
+  {
+    tabBarOptions: {
+      activeTintColor: "#fe7500",
+      inactiveTintColor: "#767676",
+      style: {
+        backgroundColor: "white",
+        borderTopWidth: 0,
+        shadowOffset: { width: 5, height: 3 },
+        shadowColor: "black",
+        shadowOpacity: 0.5,
+        elevation: 5
+      }
     }
   }
 )
