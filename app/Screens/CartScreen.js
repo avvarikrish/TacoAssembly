@@ -1,17 +1,11 @@
 import React, { Component } from "react";
-import { StyleSheet, Text, View, TouchableOpacity, SafeAreaView } from 'react-native';
+import { Text, View, TouchableOpacity } from 'react-native';
 import {
   Card,
   CardItem,
-  Thumbnail,
-  Container,
   Content,
-  Icon,
-  Header,
   Left,
-  Right,
   Body,
-  Button,
   Form
 } from "native-base";
 import axios from "axios";
@@ -51,12 +45,3 @@ class CartScreen extends Component {
   }
 }
 export default CartScreen;
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});

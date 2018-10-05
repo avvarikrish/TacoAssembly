@@ -1,18 +1,6 @@
 import React, { Component } from "react";
-import { StyleSheet, Text, View, TouchableOpacity, AsyncStorage, Dimensions } from 'react-native';
-import {
-  Card,
-  CardItem,
-  Thumbnail,
-  Container,
-  Content,
-  Icon,
-  Header,
-  Left,
-  Right,
-  Body,
-  Button
-} from "native-base";
+import { Text, View, TouchableOpacity, AsyncStorage, Dimensions } from 'react-native';
+import {  Card } from "native-base";
 import axios from "axios";
 const { width, height } = Dimensions.get("window");
 
@@ -41,9 +29,6 @@ class FinalTacoScreen extends Component {
     })
     alert ("Item added to cart");
   }
-  _clear = async () => {
-    AsyncStorage.clear();
-  }
   render() {
     const { navigation } = this.props;
     var shells = navigation.getParam ("shells");
@@ -51,8 +36,11 @@ class FinalTacoScreen extends Component {
     var mixins = navigation.getParam ("mixins");
     var condiments = navigation.getParam ("condiments");
     var seasonings = navigation.getParam ("seasonings");
+    if (seasonings == undefined) {
+      seasonings = "None";
+    }
     this.state.addToCartShell = shells + " with\n";
-    this.state.addToCartTaco = "Base Layers: " + baseLayers + "\n\nMixins: " + mixins + "\n\nCondiments: " + condiments + "\n\nSeasonings: " + seasonings;
+    this.state.addToCartTaco = baseLayers + "\n\n" + mixins + "\n\n" + condiments + "\n\n" + seasonings;
     this.state.addToCartItem = this.state.addToCartShell + this.state.addToCartTaco;
     return (
       <View>
@@ -79,20 +67,8 @@ class FinalTacoScreen extends Component {
             </Text>
           </TouchableOpacity>
         </Card>
-        <TouchableOpacity onPress={() => this._clear()}>
-          <Text>Clear </Text>
-        </TouchableOpacity>
       </View>
     );
   }
 }
 export default FinalTacoScreen;
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});

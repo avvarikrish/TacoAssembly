@@ -1,26 +1,13 @@
 import React, { Component } from "react";
-import { StyleSheet, Text, View, TouchableOpacity, Dimensions } from 'react-native';
-import {
-  Card,
-  CardItem,
-  Thumbnail,
-  Container,
-  Content,
-  Icon,
-  Header,
-  Left,
-  Right,
-  Body,
-  Button,
-  Form
-} from "native-base";
-import CustomMultiPicker from "react-native-multiple-select-list";
+import { Text, View, TouchableOpacity, Dimensions } from 'react-native';
+import { Card, CardItem, Content, Form } from "native-base";
 import axios from "axios";
+import CustomMultiPicker from "react-native-multiple-select-list";
 const { width, height } = Dimensions.get("window");
 
 class MixinScreen extends Component {
   static navigationOptions = {
-    headerTitle: "Mixins (Select up to 2)"
+    headerTitle: "Mixins (Select 1-2)"
   };
   constructor(props){
     super(props);
@@ -43,7 +30,10 @@ class MixinScreen extends Component {
     this.state.finalMixins = newMixinValues;
   }
   _goToCondiments = (mixinValues) => {
-    if (this.state.mixinArray.length < 4) {
+    var mixinValuesLength = this.state.mixinArray.length;
+    if (mixinValuesLength < 2) {
+      alert ("Please select at least 1")
+    } else if (mixinValuesLength < 4) {
       const { navigation } = this.props;
       var shellValues = navigation.getParam ("shells");
       var baseLayerValues = navigation.getParam ("baseLayers");
@@ -111,12 +101,3 @@ class MixinScreen extends Component {
   }
 }
 export default MixinScreen;
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});

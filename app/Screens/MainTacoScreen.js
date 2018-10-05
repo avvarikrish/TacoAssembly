@@ -1,19 +1,6 @@
 import React, { Component } from "react";
-import { StyleSheet, Text, View, TouchableOpacity, Dimensions } from 'react-native';
-import {
-  Card,
-  CardItem,
-  Thumbnail,
-  Container,
-  Content,
-  Icon,
-  Header,
-  Left,
-  Right,
-  Body,
-  Button,
-  Form
-} from "native-base";
+import { Text, View, TouchableOpacity, Dimensions } from 'react-native';
+import { Card, CardItem, Content} from "native-base";
 import axios from "axios";
 const { width, height } = Dimensions.get("window");
 
@@ -40,9 +27,10 @@ class MainTacoScreen extends Component {
       axios.get ("https://tacos-ocecwkpxeq.now.sh/" + ingredients[i])
         .then (function (response) {
           var randomValue = Math.floor(Math.random() * response["data"].length);
+          console.log (response["data"][randomValue]["name"]);
           randomTaco.push (response["data"][randomValue]["name"]);
           if (randomTaco.length == 5) {
-            self.props.navigation.navigate("FinalTacoScreen", {shellValue: randomTaco[0], baseLayerValue: randomTaco[1], mixinValue: randomTaco[2], condimentValue: randomTaco[3], seasoningValue: randomTaco[4]});
+            self.props.navigation.navigate("FinalTacoScreen", {shells: randomTaco[0], baseLayers: randomTaco[1], mixins: randomTaco[2], condiments: randomTaco[3], seasonings: randomTaco[4]});
           }
         })
     }

@@ -1,7 +1,6 @@
 import React from "react";
 import {
   createStackNavigator,
-  TabNavigator,
   createSwitchNavigator,
   createBottomTabNavigator
 } from "react-navigation";
@@ -56,7 +55,7 @@ const AppStack = createBottomTabNavigator(
       navigationOptions: {
         tabBarLabel: "TACOS",
         tabBarIcon: ({ tintColor }) => (
-          <Icon name="ios-nutrition-outline" color={tintColor} size={30} />
+          <Icon name="ios-add-circle-outline" color={tintColor} size={30} />
         ),
       }
     },

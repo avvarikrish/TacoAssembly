@@ -1,26 +1,13 @@
 import React, { Component } from "react";
-import { StyleSheet, Text, View, TouchableOpacity, Dimensions } from 'react-native';
-import {
-  Card,
-  CardItem,
-  Thumbnail,
-  Container,
-  Content,
-  Icon,
-  Header,
-  Left,
-  Right,
-  Body,
-  Button,
-  Form
-} from "native-base";
-import CustomMultiPicker from "react-native-multiple-select-list";
+import { Text, View, TouchableOpacity, Dimensions } from 'react-native';
+import { Card, CardItem, Content, Form } from "native-base";
 import axios from "axios";
+import CustomMultiPicker from "react-native-multiple-select-list";
 const { width, height } = Dimensions.get("window");
 
 class CondimentScreen extends Component {
   static navigationOptions = {
-    headerTitle: "Condiments (Select up to 3)"
+    headerTitle: "Condiments (Select 1-3)"
   };
   constructor(props){
     super(props);
@@ -43,7 +30,10 @@ class CondimentScreen extends Component {
     this.state.finalCondiments = newCondimentValues;
   }
   _goToSeasonings = (condimentValues) => {
-    if (this.state.condimentsArray.length < 5) {
+    var condimentValuesLength = this.state.condimentsArray.length;
+    if (condimentValuesLength < 2) {
+      alert ("Please select at least 1")
+    } else if (condimentValuesLength < 5) {
       const { navigation } = this.props;
       var shellValues = navigation.getParam ("shells");
       var baseLayerValues = navigation.getParam ("baseLayers");
@@ -112,12 +102,3 @@ class CondimentScreen extends Component {
   }
 }
 export default CondimentScreen;
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});

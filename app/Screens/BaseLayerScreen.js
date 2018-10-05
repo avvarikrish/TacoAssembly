@@ -1,27 +1,13 @@
 import React, { Component } from "react";
-import { StyleSheet, Text, View, TouchableOpacity, Dimensions, SafeAreaView } from 'react-native';
-import {
-  Card,
-  CardItem,
-  Thumbnail,
-  Container,
-  Content,
-  Icon,
-  Header,
-  Left,
-  Right,
-  Body,
-  Button,
-  Form
-} from "native-base";
-import CustomMultiPicker from "react-native-multiple-select-list";
-import { TextButton, RaisedTextButton } from "react-native-material-buttons";
+import { Text, View, TouchableOpacity, Dimensions } from 'react-native';
+import { Card, CardItem, Content, Form } from "native-base";
 import axios from "axios";
+import CustomMultiPicker from "react-native-multiple-select-list";
 const { width, height } = Dimensions.get("window");
 
 class BaseLayerScreen extends Component {
   static navigationOptions = {
-    headerTitle: "Base Layers (Select up to 3)"
+    headerTitle: "Base Layers (Select 1-3)"
   };
   constructor(props){
     super(props);
@@ -44,7 +30,10 @@ class BaseLayerScreen extends Component {
     this.state.finalBaseLayers = newBaseLayerValues;
   }
   _goToMixin = (baseLayerValues) => {
-    if (this.state.baseLayersArray.length < 5) {
+    var baseLayersLength = this.state.baseLayersArray.length;
+    if (baseLayersLength < 2) {
+      alert ("Please select at least 1")
+    } else if (baseLayersLength < 5) {
       const { navigation } = this.props;
       var shellValues = navigation.getParam ("shells");
       var self = this;
@@ -111,12 +100,3 @@ class BaseLayerScreen extends Component {
   }
 }
 export default BaseLayerScreen;
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
